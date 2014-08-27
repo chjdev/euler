@@ -51,16 +51,16 @@ INPUT = """73167176531330624919225119674426574742355349194934
 71636269561882670428252483600823257530420752963450""".replace('\n', '')
 
 
-splitted = INPUT.split('0')
-filtered = filter(lambda p: len(p) >= N, splitted)
+split = INPUT.split('0')
+filtered = filter(lambda p: len(p) >= N, split)
 
 expanded = []
 for group in filtered:
     for i in range(0, len(group) - N + 1):
         expanded.append(group[i:i+N])
 
-char_splitted = map(lambda group: map(lambda char: int(char), list(group)), expanded)
+char_split = map(lambda group: map(int, list(group)), expanded)
 
-products = map(lambda group: reduce(lambda a, b: a*b, group), char_splitted)
+products = map(lambda group: reduce(lambda a, b: a*b, group), char_split)
 
 print(max(products))

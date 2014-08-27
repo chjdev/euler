@@ -8,6 +8,7 @@ import itertools
 
 N = 10001
 
+
 def is_divisible_by_one(x, factors):
     for factor in factors:
         if x % factor == 0:
