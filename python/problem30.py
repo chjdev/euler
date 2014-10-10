@@ -45,4 +45,4 @@ def gen_candidates():
 pow5_sums = [(sum([d**5 for d in digit_representation]), "".join(map(str, digit_representation)))
              for digit_representation in gen_candidates()]
 identical = [(a, b) for a, b in pow5_sums if sorted(list(str(a))) == sorted(list(b))]
-print(sum([a for a, _ in identical])) #443839
+print(sum([a for a, _ in identical]))  #443839
