@@ -29,16 +29,17 @@ def check_palindrome_b2(number_b10):
 
 def next_palindrome_b10():
     yield from range(0, 10)
-    step = 1
+    lower = 1
     while True:
-        for i in range(10 ** (step - 1), 10 ** step):  # even num digits
+        upper = lower * 10
+        for i in range(lower, upper):  # even num digits
             i_str = str(i)
             yield int(i_str + i_str[::-1])
-        for i in range(10 ** (step - 1), 10 ** step):  # odd num digits
+        for i in range(lower, upper):  # odd num digits
             i_str = str(i)
             for j in range(0, 10):
                 yield int(i_str + str(j) + i_str[::-1])
-        step += 1
+        lower *= 10
 
 
 def next_palindrome_b10_below(maximum):
