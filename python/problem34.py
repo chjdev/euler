@@ -62,10 +62,8 @@ def add_one(idx=0):
 
 
 def next_digit_factorial_sum_equivalent():
-    for number in range(11, UPPER):
-        fac_sum = add_one()
-        if fac_sum == number:
-            yield number
+    yield from (number for number in range(11, UPPER) if number == add_one())
+
 
 result = sum(next_digit_factorial_sum_equivalent())
 print(result)
