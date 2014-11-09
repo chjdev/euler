@@ -23,38 +23,9 @@
 # primes for consecutive values of n, starting with n = 0.
 
 from itertools import count
-import math
+from utils.primes import Primes
 
 MAX_A = MAX_B = 1000
-
-
-class Primes:
-    def __init__(self):
-        self.sieve = [False, False, True, True, False, True, False, True]  # init to 0 - 3
-
-    def _expand(self):
-        length = len(self.sieve)
-        new_length = 2 * length
-        right = [True,] * length
-        for num in filter(lambda i: self.sieve[i], range(0, len(self.sieve))):
-            i = math.ceil(length / num)
-            pos = num * i
-            while pos < new_length:
-                right[pos - length] = False
-                i += 1
-                pos = num * i
-        self.sieve = self.sieve + right
-
-    def __getitem__(self, num):
-        if num < 2:
-            return False
-
-        while num >= len(self.sieve):
-            self._expand()
-
-        return self.sieve[num]
-
-
 PRIMES = Primes()
 
 
@@ -73,8 +44,8 @@ def calc_num_primes(factors):
             return num
 
 candidates = ((a, b)
-              for b in range(-MAX_B + 1, MAX_B) if PRIMES[b]  # b has to be a prime, otherwise n=0 is prime
-              for a in range(-MAX_A + 1, MAX_A) if a % 2 == 1)  # a has to be odd, so n=1 is odd
+              for b in PRIMES.iterate(0, MAX_B)  # b must be prime for case n = 0
+              for a in range(-b + 2, MAX_A) if a % 2 == 1)  # a has to be odd and > -b for case n = 1
 num_primes = {}
 for candidate in candidates:
     num = calc_num_primes(candidate)
